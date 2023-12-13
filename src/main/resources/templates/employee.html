@@ -186,7 +186,7 @@
 <body>
 <div class="container">
     <h1>Listagem de Funcionários</h1>
-    <a th:href="@{/addEmployee}" class="btn btn-primary btn-sm mb-3">Adicionar funcionário</a>
+    <a th:href="@{/employee/addEmployee}" class="btn btn-primary btn-sm mb-3">Adicionar funcionário</a>
 
     <th:block th:if="${not #lists.isEmpty(listEmployees)}">
         <table>
@@ -204,7 +204,7 @@
                 <td th:text="${employee.lastName}"></td>
                 <td th:text="${employee.email}"></td>
                 <td>
-                    <a th:href="@{/updateEmployee/{id}(id=${employee.id})}" class="btn btn-outline-primary btn-sm mr-2">Atualizar</a>
+                    <a th:href="@{/employee/updateEmployee/{id}(id=${employee.id})}" class="btn btn-outline-primary btn-sm mr-2">Atualizar</a>
                     <button class="btn btn-outline-danger btn-sm" th:onclick="'openModal(\'' + ${employee.id} + '\')'">Deletar</button>
                 </td>
             </tr>
@@ -250,7 +250,7 @@
 
     function confirmDelete() {
         const employeeId = document.getElementById('confirmationModal').dataset.employeeId;
-        window.location.href = `/deleteEmployee/${employeeId}`;
+        window.location.href = `/employee/deleteEmployee/${employeeId}`;
     }
 </script>
 </body>

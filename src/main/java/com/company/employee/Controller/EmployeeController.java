@@ -22,35 +22,35 @@ public class EmployeeController {
         this._employeeService = employeeService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/employee")
     public String viewHomePage(Model model) {
         return findPaginated(1, model);
     }
 
-    @GetMapping("/addEmployee")
+    @GetMapping("/employee/addEmployee")
     public String addEmployee(Model model) {
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
         return "addEmployee";
     }
 
-    @PostMapping("/save-employee")
+    @PostMapping("/employee/save-employee")
     public String saveEmployee(@ModelAttribute("employee") Employee employee) {
         _employeeService.Save(employee);
-        return "redirect:/";
+        return "redirect:/employee";
     }
 
-    @GetMapping("/updateEmployee/{id}")
+    @GetMapping("/employee/updateEmployee/{id}")
     public String updateEmployee(@PathVariable(value = "id") long id, Model model) {
         Employee employee = _employeeService.GetBydId(id);
         model.addAttribute("employee", employee);
         return "updateEmployee";
     }
 
-    @GetMapping("/deleteEmployee/{id}")
+    @GetMapping("/employee/deleteEmployee/{id}")
     public String deleteEmployee(@PathVariable (value = "id") long id) {
         this._employeeService.Delete(id);
-        return "redirect:/";
+        return "redirect:/employee";
     }
 
     @GetMapping("/page/{pageNo}")
@@ -65,6 +65,6 @@ public class EmployeeController {
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
 
-        return "index";
+        return "employee";
     }
 }

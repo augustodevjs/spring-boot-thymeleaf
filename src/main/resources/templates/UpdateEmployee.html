@@ -17,13 +17,13 @@
     }
 
     .container {
+      max-width: 400px;
       margin: 0 auto;
       padding: 20px;
       background-color: #2D3748;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       border-radius: 8px;
       width: 80%;
-      max-width: 400px;
     }
 
     h1, h2 {
@@ -92,13 +92,14 @@
 </head>
 <body>
 <div class="container">
-  <h1>Cadastro de Funcionário</h1>
+  <h1>Atualização de Funcionário</h1>
   <hr>
   <form action="#" th:action="@{/employee/save-employee}" th:object="${employee}" method="POST">
+    <input type="hidden" th:field="*{id}" />
     <input type="text" th:field="*{firstName}" placeholder="Digite o nome do funcionário" id="firstName">
     <input type="text" th:field="*{lastName}" placeholder="Digite o último nome do funcionário" id="lastName">
     <input type="text" th:field="*{email}" placeholder="Digite o email do funcionário" id="email">
-    <button type="submit" class="btn btn-info">Cadastrar</button>
+    <button type="submit" class="btn btn-info">Atualizar</button>
   </form>
   <hr>
   <a th:href="@{/employee}">Voltar</a>
