@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <style>
+    body {
+      background-color: #1A202C;
+      font-family: 'Roboto', sans-serif;
+      color: #ffffff;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #2D3748;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #38B2AC;
+    }
+
+    hr {
+      background-color: #4C51BF;
+      border: none;
+      height: 1px;
+      margin: 20px 0;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #4A5568;
+      border-radius: 4px;
+      background-color: #2D3748;
+      color: #ffffff;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    input::placeholder {
+       color: #ccc;
+    }
+
+    button {
+      padding: 12px;
+      background-color: #38B2AC;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button:hover {
+      background-color: #319795;
+    }
+
+    a {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: #38B2AC;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <title>Employee Management System</title>
+</head>
+<body>
+<div class="container">
+  <h1>Cadastro de Funcionário</h1>
+  <hr>
+  <form action="#" th:action="@{/save-employee}" th:object="${employee}" method="POST">
+    <input type="text" th:field="*{firstName}" placeholder="Digite o nome do funcionário" id="firstName">
+    <input type="text" th:field="*{lastName}" placeholder="Digite o último nome do funcionário" id="lastName">
+    <input type="text" th:field="*{email}" placeholder="Digite o email do funcionário" id="email">
+    <button type="submit" class="btn btn-info">Cadastrar</button>
+  </form>
+  <hr>
+  <a th:href="@{/}">Voltar</a>
+</div>
+</body>
+</html>
