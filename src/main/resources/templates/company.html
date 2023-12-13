@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <style>
         body {
             background-color: #1A202C;
             font-family: 'Roboto', sans-serif;
@@ -181,67 +181,64 @@
             margin-left: 10px;
         }
     </style>
-    <title>Employee Management System</title>
+  <title>Employee Management System</title>
 </head>
 <body>
 <div class="container">
-    <h1>Listagem de Funcionários</h1>
-    <a th:href="@{/employee/addEmployee}" class="btn btn-primary btn-sm mb-3">Adicionar funcionário</a>
+  <h1>Listagem de Empresas</h1>
+  <a th:href="@{/company/addCompany}" class="btn btn-primary btn-sm mb-3">Adicionar empresa</a>
 
-    <th:block th:if="${not #lists.isEmpty(listEmployees)}">
-        <table>
-            <thead>
-            <tr>
-                <th>Nome do Funcionário</th>
-                <th>Último Nome do Funcionário</th>
-                <th>Email do Funcionário</th>
-                <th>Ações</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="employee : ${listEmployees}">
-                <td th:text="${employee.firstName}"></td>
-                <td th:text="${employee.lastName}"></td>
-                <td th:text="${employee.email}"></td>
-                <td>
-                    <a th:href="@{/employee/updateEmployee/{id}(id=${employee.id})}" class="btn btn-outline-primary btn-sm mr-2">Atualizar</a>
-                    <button class="btn btn-outline-danger btn-sm" th:onclick="'openModal(\'' + ${employee.id} + '\')'">Deletar</button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+  <th:block th:if="${not #lists.isEmpty(listCompanies)}">
+    <table>
+      <thead>
+      <tr>
+        <th>Nome da Empresa</th>
+        <th>Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="company : ${listCompanies}">
+        <td th:text="${company.nameCompany}"></td>
+        <td>
+          <a th:href="@{/company/updateCompany/{id}(id=${company.id})}" class="btn btn-outline-primary btn-sm mr-2">Atualizar</a>
+          <button class="btn btn-outline-danger btn-sm" th:onclick="'openModal(\'' + ${company.id} + '\')'">Deletar</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
 
-        <div th:if="${totalPages > 1}" class="mt-4">
-            <ul class="pagination justify-content-center">
-                <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
-                    <a th:if="${currentPage != i}" class="page-link" th:href="@{'/pageEmployee/' + ${i}}">[[${i}]]</a>
-                    <span th:unless="${currentPage != i}" class="page-link disabled">[[${i}]]</span>
-                </li>
-            </ul>
-        </div>
-    </th:block>
-
-    <div th:if="${#lists.isEmpty(listEmployees)}" class="mt-4">
-        <p>Nenhum funcionário cadastrado no momento.</p>
+    <div th:if="${totalPages > 1}" class="mt-4">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
+          <a th:if="${currentPage != i}" class="page-link" th:href="@{'/pageCompany/' + ${i}}">[[${i}]]</a>
+          <span th:unless="${currentPage != i}" class="page-link disabled">[[${i}]]</span>
+        </li>
+      </ul>
     </div>
+  </th:block>
+
+  <div th:if="${#lists.isEmpty(listCompanies)}" class="mt-4">
+    <p>Nenhuma empresa cadastrado no momento.</p>
+  </div>
 </div>
 
 
 <div id="confirmationModal" class="modal">
-    <div class="modal-content">
-        <h1>Confirmação de Exclusão</h1>
-        <p>Você tem certeza que deseja excluir este funcionário?</p>
-        <div class="modal-btns">
-            <button class="btn btn-outline-danger btn-sm modal-btn" onclick="closeModal()">Fechar</button>
-            <button class="btn btn-outline-primary btn-sm modal-btn" onclick="confirmDelete()">Confirmar</button>
-        </div>
+  <div class="modal-content">
+    <h1>Confirmação de Exclusão</h1>
+    <p>Você tem certeza que deseja excluir esta empresa?</p>
+    <div class="modal-btns">
+      <button class="btn btn-outline-danger btn-sm modal-btn" onclick="closeModal()">Fechar</button>
+      <button class="btn btn-outline-primary btn-sm modal-btn" onclick="confirmDelete()">Confirmar</button>
     </div>
+  </div>
 </div>
 
 <script>
-    function openModal(employeeId) {
+    function openModal(companyId) {
         document.getElementById('confirmationModal').style.display = 'flex';
-        document.getElementById('confirmationModal').dataset.employeeId = employeeId;
+        console.log(companyId);
+        document.getElementById('confirmationModal').dataset.companyId = companyId;
     }
 
     function closeModal() {
@@ -249,8 +246,8 @@
     }
 
     function confirmDelete() {
-        const employeeId = document.getElementById('confirmationModal').dataset.employeeId;
-        window.location.href = `/employee/deleteEmployee/${employeeId}`;
+        const companyId = document.getElementById('confirmationModal').dataset.companyId;
+        window.location.href = `/company/deleteCompany/${companyId}`;
     }
 </script>
 </body>
