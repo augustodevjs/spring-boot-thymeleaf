@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            background-color: #1A202C;
+            font-family: 'Roboto', sans-serif;
+            color: #ffffff;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-center: center;
+            height: 100vh;
+        }
+
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #2D3748;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #38B2AC;
+        }
+
+        .btn {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-primary {
+            color: #ffffff;
+            background-color: #38B2AC;
+            border: 1px solid #38B2AC;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline-primary {
+            color: #38B2AC;
+            background-color: transparent;
+            border: 1px solid #38B2AC;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary:hover,
+        .btn-outline-primary:hover {
+            background-color: #319795;
+            border: 1px solid #319795;
+            color: #ffffff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #2D3748;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #ffffff;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #4A5568;
+        }
+
+        th {
+            background-color: #38B2AC;
+            color: #ffffff;
+        }
+
+        tbody tr:hover {
+            background-color: #2D3748;
+        }
+
+        .btn-outline-danger {
+            color: #E53E3E;
+            background-color: transparent;
+            border: 1px solid #E53E3E;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #C53030;
+            border: 1px solid #C53030;
+            color: #ffffff;
+        }
+
+        .pagination {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page-item {
+            margin: 0 5px;
+        }
+
+        .page-link {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #38B2AC;
+            color: #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        .page-link:hover {
+            background-color: #319795;
+        }
+
+        .disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .modal-content {
+            background-color: #2D3748;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+            animation: modal-fade 0.3s ease-out;
+        }
+
+        @keyframes modal-fade {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal h1 {
+            color: #38B2AC;
+            text-align: left;
+            font-size: 1.5rem;
+        }
+
+        .modal-btns {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            margin-left: 10px;
+        }
+    </style>
+    <title>Employee Management System</title>
+</head>
+<body>
+<div class="container">
+    <h1>Listagem de Funcionários</h1>
+    <a th:href="@{/addEmployee}" class="btn btn-primary btn-sm mb-3">Adicionar funcionário</a>
+
+    <th:block th:if="${not #lists.isEmpty(listEmployees)}">
+        <table>
+            <thead>
+            <tr>
+                <th>Nome do Funcionário</th>
+                <th>Último Nome do Funcionário</th>
+                <th>Email do Funcionário</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${listEmployees}">
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.email}"></td>
+                <td>
+                    <a th:href="@{/updateEmployee/{id}(id=${employee.id})}" class="btn btn-outline-primary btn-sm mr-2">Atualizar</a>
+                    <button class="btn btn-outline-danger btn-sm" th:onclick="'openModal(\'' + ${employee.id} + '\')'">Deletar</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div th:if="${totalPages > 1}" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != i}" class="page-link" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+                    <span th:unless="${currentPage != i}" class="page-link disabled">[[${i}]]</span>
+                </li>
+            </ul>
+        </div>
+    </th:block>
+
+    <div th:if="${#lists.isEmpty(listEmployees)}" class="mt-4">
+        <p>Nenhum funcionário cadastrado no momento.</p>
+    </div>
+</div>
+
+
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <h1>Confirmação de Exclusão</h1>
+        <p>Você tem certeza que deseja excluir este funcionário?</p>
+        <div class="modal-btns">
+            <button class="btn btn-outline-danger btn-sm modal-btn" onclick="closeModal()">Fechar</button>
+            <button class="btn btn-outline-primary btn-sm modal-btn" onclick="confirmDelete()">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal(employeeId) {
+        document.getElementById('confirmationModal').style.display = 'flex';
+        document.getElementById('confirmationModal').dataset.employeeId = employeeId;
+    }
+
+    function closeModal() {
+        document.getElementById('confirmationModal').style.display = 'none';
+    }
+
+    function confirmDelete() {
+        const employeeId = document.getElementById('confirmationModal').dataset.employeeId;
+        window.location.href = `/deleteEmployee/${employeeId}`;
+    }
+</script>
+</body>
+</html>
