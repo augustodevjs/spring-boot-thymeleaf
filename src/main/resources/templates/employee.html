@@ -6,22 +6,51 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <style>
         body {
-            background-color: #1A202C;
-            font-family: 'Roboto', sans-serif;
-            color: #ffffff;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-center: center;
-            height: 100vh;
+          font-family: 'Roboto', sans-serif;
+          color: #ffffff;
+          margin: 0;
+          height: 100vh;
+          background-color: #1A202C;
+        }
+
+        header {
+          background-color: #2D3748;
+          padding: 10px;
+          text-align: center;
+          margin-bottom: 2rem;
+        }
+
+        header .header-container {
+          padding: 1rem 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        header h1 {
+          color: #38B2AC;
+          margin: 0;
+        }
+
+        nav {
+          margin-top: 10px;
+        }
+
+        nav a {
+          color: #38B2AC;
+          margin-right: 10px;
+          text-decoration: none;
+          font-weight: bold;
         }
 
         .container {
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #2D3748;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 20px;
+          background-color: #2D3748;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
@@ -74,9 +103,9 @@
         }
 
         th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #4A5568;
+          padding: 12px 15px;
+          text-align: center;
+          border-bottom: 1px solid #4A5568;
         }
 
         th {
@@ -184,6 +213,16 @@
     <title>Employee Management System</title>
 </head>
 <body>
+<header>
+    <div class="header-container">
+        <h1>Gerenciamento de Empresas</h1>
+        <nav>
+            <a href="/company">Empresas</a>
+            <a href="/employee">Funcionários</a>
+        </nav>
+    </div>
+</header>
+
 <div class="container">
     <h1>Listagem de Funcionários</h1>
     <a th:href="@{/employee/addEmployee}" class="btn btn-primary btn-sm mb-3">Adicionar funcionário</a>
@@ -225,7 +264,6 @@
         <p>Nenhum funcionário cadastrado no momento.</p>
     </div>
 </div>
-
 
 <div id="confirmationModal" class="modal">
     <div class="modal-content">
