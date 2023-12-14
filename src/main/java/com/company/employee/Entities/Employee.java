@@ -1,8 +1,9 @@
 package com.company.employee.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
-import java.util.Objects;
 
 @Entity
 @Table(name = "Employee")
@@ -11,12 +12,16 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "O primeiro nome não pode estar em branco")
     @Column(name = "first_name")
     private String firstName;
 
+    @NotBlank(message = "O último nome não pode estar em branco")
     @Column(name = "last_name")
     private String lastName;
 
+    @NotBlank(message = "O e-mail não pode estar em branco")
+    @Email(message = "O e-mail deve ser válido")
     @Column(name = "email")
     private String email;
 

@@ -1,8 +1,7 @@
 package com.company.employee.Entities;
 
 import jakarta.persistence.*;
-
-import java.util.Objects;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Company")
@@ -11,6 +10,7 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank(message = "O nome da empresa não pode estar em branco")
     @Column(name = "nome_empresa")
     private String nameCompany;
 
