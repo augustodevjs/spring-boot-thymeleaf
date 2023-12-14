@@ -18,6 +18,10 @@ public class Employee {
     @Column(name = "email")
     private String email;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+
     public long getId() {
         return id;
     }
@@ -48,5 +52,13 @@ public class Employee {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

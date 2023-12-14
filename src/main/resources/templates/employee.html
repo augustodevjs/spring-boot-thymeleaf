@@ -29,10 +29,14 @@
           margin: 0 auto;
         }
 
-        header h1 {
-          color: #38B2AC;
-          margin: 0;
-        }
+    header a {
+      text-decoration: none;
+    }
+
+    header h1 {
+      color: #fff;
+      margin: 0;
+    }
 
         nav {
           margin-top: 10px;
@@ -215,7 +219,9 @@
 <body>
 <header>
     <div class="header-container">
-        <h1>Gerenciamento de Empresas</h1>
+        <a href="/">
+            <h1>Gerenciamento de Empresas</h1>
+        </a>
         <nav>
             <a href="/company">Empresas</a>
             <a href="/employee">Funcionários</a>
@@ -234,6 +240,7 @@
                 <th>Nome do Funcionário</th>
                 <th>Último Nome do Funcionário</th>
                 <th>Email do Funcionário</th>
+                <th>Empresa do Funcionário</th>
                 <th>Ações</th>
             </tr>
             </thead>
@@ -242,6 +249,7 @@
                 <td th:text="${employee.firstName}"></td>
                 <td th:text="${employee.lastName}"></td>
                 <td th:text="${employee.email}"></td>
+                <td th:text="${employee.company.nameCompany}"></td>
                 <td>
                     <a th:href="@{/employee/updateEmployee/{id}(id=${employee.id})}" class="btn btn-outline-primary btn-sm mr-2">Atualizar</a>
                     <button class="btn btn-outline-danger btn-sm" th:onclick="'openModal(\'' + ${employee.id} + '\')'">Deletar</button>

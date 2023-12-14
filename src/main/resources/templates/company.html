@@ -29,8 +29,12 @@
       margin: 0 auto;
     }
 
+    header a {
+      text-decoration: none;
+    }
+
     header h1 {
-      color: #38B2AC;
+      color: #fff;
       margin: 0;
     }
 
@@ -177,7 +181,7 @@
       background-color: #2D3748;
       padding: 20px;
       border-radius: 8px;
-      max-width: 400px;
+      max-width: 600px;
       margin: auto;
       text-align: center;
       animation: modal-fade 0.3s ease-out;
@@ -216,7 +220,9 @@
 
 <header>
   <div class="header-container">
-    <h1>Gerenciamento de Empresas</h1>
+    <a href="/">
+      <h1>Gerenciamento de Empresas</h1>
+    </a>
     <nav>
       <a href="/company">Empresas</a>
       <a href="/employee">Funcionários</a>
@@ -225,6 +231,7 @@
 </header>
 
 <div class="container">
+  <h1>Listagem de Empresas</h1>
   <a th:href="@{/company/addCompany}" class="btn btn-primary btn-sm mb-3">Adicionar empresa</a>
 
   <th:block th:if="${not #lists.isEmpty(listCompanies)}">
@@ -272,6 +279,16 @@
   </div>
 </div>
 
+<div id="errorModal" class="modal">
+  <div class="modal-content">
+    <h1>Erro na Exclusão</h1>
+    <p>Não é possível excluir uma empresa associada a um ou mais funcionários.</p>
+    <div class="modal-btns">
+      <button class="btn btn-outline-primary btn-sm modal-btn" onclick="closeErrorModal()">Fechar</button>
+    </div>
+  </div>
+</div>
+
 <script>
     function openModal(companyId) {
         document.getElementById('confirmationModal').style.display = 'flex';
@@ -286,6 +303,21 @@
     function confirmDelete() {
         const companyId = document.getElementById('confirmationModal').dataset.companyId;
         window.location.href = `/company/deleteCompany/${companyId}`;
+    }
+
+        function openErrorModal() {
+        document.getElementById('errorModal').style.display = 'flex';
+    }
+
+    function closeErrorModal() {
+        document.getElementById('errorModal').style.display = 'none';
+    }
+
+    window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('deleteError')) {
+            openErrorModal();
+        }
     }
 </script>
 </body>

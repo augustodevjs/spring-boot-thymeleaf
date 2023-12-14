@@ -30,8 +30,12 @@ body {
       margin: 0 auto;
     }
 
+    header a {
+      text-decoration: none;
+    }
+
     header h1 {
-      color: #38B2AC;
+      color: #fff;
       margin: 0;
     }
 
@@ -115,13 +119,32 @@ body {
     a:hover {
       text-decoration: underline;
     }
+
+    select {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #4A5568;
+      border-radius: 4px;
+      background-color: #2D3748;
+      color: #ffffff;
+      width: 100%;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    select:hover,
+    select:focus {
+        border-color: #38B2AC;
+    }
   </style>
   <title>Employee Management System</title>
 </head>
 <body>
 <header>
   <div class="header-container">
-    <h1>Gerenciamento de Empresas</h1>
+    <a href="/">
+      <h1>Gerenciamento de Empresas</h1>
+    </a>
     <nav>
       <a href="/company">Empresas</a>
       <a href="/employee">Funcionários</a>
@@ -137,7 +160,11 @@ body {
     <input type="text" th:field="*{firstName}" placeholder="Digite o nome do funcionário" id="firstName">
     <input type="text" th:field="*{lastName}" placeholder="Digite o último nome do funcionário" id="lastName">
     <input type="text" th:field="*{email}" placeholder="Digite o email do funcionário" id="email">
-    <button type="submit" class="btn btn-info">Atualizar</button>
+    <select th:field="*{company}" id="companyId">
+      <option value="" th:selected="${employee.company == null}">Selecione uma empresa</option>
+      <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.nameCompany}" ></option>
+    </select>
+    <button type="submit" class="btn btn-info" >Atualizar</button>
   </form>
   <hr>
   <a th:href="@{/employee}">Voltar</a>

@@ -1,14 +1,16 @@
 package com.company.employee.Controller;
 
+import com.company.employee.Entities.Company;
 import org.springframework.ui.Model;
-import com.company.employee.Entities.Employee;
 import org.springframework.data.domain.Page;
+import com.company.employee.Entities.Employee;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.company.employee.Application.Services.CompanyService;
 import com.company.employee.Application.Services.EmployeeService;
 
 import java.util.List;
@@ -16,10 +18,12 @@ import java.util.List;
 @Controller
 public class EmployeeController {
     private EmployeeService _employeeService;
+    private CompanyService _companyService;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, CompanyService companyService) {
         this._employeeService = employeeService;
+        this._companyService = companyService;
     }
 
     @GetMapping("/employee")
@@ -30,7 +34,9 @@ public class EmployeeController {
     @GetMapping("/employee/addEmployee")
     public String addEmployee(Model model) {
         Employee employee = new Employee();
+        List<Company> companies = _companyService.GetAll();
         model.addAttribute("employee", employee);
+        model.addAttribute("companies", companies);
         return "addEmployee";
     }
 
@@ -43,7 +49,9 @@ public class EmployeeController {
     @GetMapping("/employee/updateEmployee/{id}")
     public String updateEmployee(@PathVariable(value = "id") long id, Model model) {
         Employee employee = _employeeService.GetBydId(id);
+        List<Company> companies = _companyService.GetAll();
         model.addAttribute("employee", employee);
+        model.addAttribute("companies", companies);
         return "updateEmployee";
     }
 

@@ -48,8 +48,12 @@ public class CompanyController {
     }
 
     @GetMapping("/company/deleteCompany/{id}")
-    public String deleteCompany(@PathVariable (value = "id") long id) {
-        this._companyService.Delete(id);
+    public String deleteCompany(@PathVariable(value = "id") long id, Model model) {
+        try {
+            this._companyService.Delete(id);
+        } catch (Exception e) {
+            return "redirect:/company?deleteError=true";
+        }
         return "redirect:/company";
     }
 

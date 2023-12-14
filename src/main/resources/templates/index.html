@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: #ffffff;
+      margin: 0;
+      height: 100vh;
+      background-color: #1A202C;
+    }
+
+    header {
+      background-color: #2D3748;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header .header-container {
+      padding: 1rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header a {
+      text-decoration: none;
+    }
+
+    header h1 {
+      color: #fff;
+      margin: 0;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: #38B2AC;
+      margin-right: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #319795;
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    .content p {
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+    }
+
+    .content a {
+      color: #38B2AC;
+      text-decoration: underline;
+      font-size: 1.3rem;
+      transition: color 0.3s ease;
+    }
+
+    .content a:hover {
+      color: #319795;
+    }
+  </style>
+  <title>Employee Management System</title>
+</head>
+<body>
+<header>
+  <div class="header-container">
+    <a href="/">
+    <h1>Gerenciamento de Empresas</h1>
+    </a>
+    <nav>
+      <a href="/company">Empresas</a>
+      <a href="/employee">Funcionários</a>
+    </nav>
+  </div>
+</header>
+
+<div class="content">
+  <p>Bem-vindo ao nosso sistema de gerenciamento de empresas. Aqui, você pode explorar informações detalhadas sobre as empresas que fazem parte da nossa organização. Clique em <a href="/company">Empresas</a> para ver a lista completa e descubra mais sobre cada uma delas.</p>
+
+  <p>Navegue pela seção de <a href="/employee">Funcionários</a> para conhecer melhor as pessoas talentosas que compõem nossa equipe. Descubra suas funções, experiências e contribuições para o sucesso da empresa.</p>
+
+  <p>Estamos ansiosos para compartilhar mais informações e histórias interessantes. Sinta-se à vontade para explorar e conhecer melhor o nosso mundo empresarial!</p>
+</div>
+</body>
+</html>
